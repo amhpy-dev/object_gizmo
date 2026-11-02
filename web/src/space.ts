@@ -21,14 +21,17 @@ export function threeToGta(vec: Vec3): Vec3 {
 	return { x: vec.x, y: -vec.z, z: vec.y }
 }
 
+// GTA rotation order 2 (heading, pitch, roll) in three's axes, where z points along GTA's -y
+export const EULER_ORDER = 'YXZ'
+
 export function gtaRotationToEuler(rotation: Vec3): [number, number, number] {
-	return [rotation.x * RAD, rotation.z * RAD, rotation.y * RAD]
+	return [rotation.x * RAD, rotation.z * RAD, -rotation.y * RAD]
 }
 
 export function eulerToGtaRotation(x: number, y: number, z: number): Vec3 {
 	return {
 		x: x * DEG,
-		y: z * DEG,
+		y: -z * DEG,
 		z: y * DEG,
 	}
 }
